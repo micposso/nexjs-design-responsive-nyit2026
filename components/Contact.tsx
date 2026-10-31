@@ -1,19 +1,40 @@
-export function Contact() {
+import { ArrowLink } from './ArrowLink';
+import { ContactHeading } from './ContactHeading';
+import { ContactTopline } from './ContactTopline';
+
+type ContactProps = {
+  sectionId: string;
+  titleId: string;
+  topLine: string;
+  availability: string;
+  heading: string;
+  headingEmphasis: string;
+  email: string;
+  emailHref: string;
+};
+
+export function Contact({
+  sectionId,
+  titleId,
+  topLine,
+  availability,
+  heading,
+  headingEmphasis,
+  email,
+  emailHref,
+}: ContactProps) {
   return (
-    <section className="contact section-pad" id="contact" aria-labelledby="contact-title">
-      <div className="contact-topline">
-        <span>Have a project in mind?</span>
-        <span>Available for select collaborations</span>
-      </div>
-      <h2 id="contact-title">
-        Let&apos;s make something
-        <br />
-        <em>worth remembering.</em>
-      </h2>
-      <a className="email-link" href="mailto:hello@mirastudio.design">
-        hello@mirastudio.design
-        <span aria-hidden="true">↗</span>
-      </a>
+    <section className="contact section-pad" id={sectionId} aria-labelledby={titleId}>
+      <ContactTopline prompt={topLine} availability={availability} />
+      <ContactHeading titleId={titleId} heading={heading} emphasis={headingEmphasis} />
+      <ArrowLink
+        className="email-link"
+        href={emailHref}
+        icon={<span aria-hidden="true">↗</span>}
+      >
+        {email}
+      </ArrowLink>
     </section>
   );
 }
+

@@ -1,25 +1,32 @@
-const ArrowUpRight = () => (
-  <svg viewBox="0 0 16 16" aria-hidden="true">
-    <path d="M4 12 12 4M5 4h7v7" />
-  </svg>
-);
+import { ArrowUpRight } from './ArrowUpRight';
+import { Brand } from './Brand';
+import { ButtonLink } from './ButtonLink';
+import { Navigation, type NavigationLink } from './Navigation';
 
-export function Header() {
+export type HeaderProps = {
+  brandMark: string;
+  brandName: string;
+  brandHref: string;
+  brandAriaLabel: string;
+  navigationAriaLabel: string;
+  navigation: NavigationLink[];
+  cta: NavigationLink;
+};
+
+export function Header({
+  brandMark,
+  brandName,
+  brandHref,
+  brandAriaLabel,
+  navigationAriaLabel,
+  navigation,
+  cta,
+}: HeaderProps) {
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="Mira Studio home">
-        <span className="brand-mark">m</span>
-        <span>Mira Studio</span>
-      </a>
-      <nav className="desktop-nav" aria-label="Main navigation">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a className="header-cta" href="#contact">
-        Let&apos;s talk
-        <ArrowUpRight />
-      </a>
+      <Brand mark={brandMark} name={brandName} href={brandHref} ariaLabel={brandAriaLabel} />
+      <Navigation links={navigation} ariaLabel={navigationAriaLabel} />
+      <ButtonLink href={cta.href} label={cta.label} icon={<ArrowUpRight />} />
     </header>
   );
 }
